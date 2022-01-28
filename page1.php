@@ -70,7 +70,7 @@ $message = date('Y/m/d/l');
                     <li>ペットの名前<input  type="text" name="pname"></li>
                     <li>種類:   <input type="text" name="sp"></li>
                 </ul>
-            <p>ペットの好きなものや特徴を好きに書いて！！！</p>
+            <p>ペットの好きなものや特徴を好きに書いてね！！！</p>
             <textarea name='text' id='comment'></textarea>
 
             <button type="submit">個人情報を送信！</button>
