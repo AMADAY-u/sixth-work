@@ -1,9 +1,34 @@
 <?php
+//1.  DB接続します
+try {
+//ID:'root', Password: 'root'
+    $pdo = new PDO('mysql:dbname=unit_db;charset=utf8;host=localhost','root','root');
+} catch (PDOException $e) {
+    exit('DBConnectError:'.$e->getMessage());
+}
+
+//２．データ取得SQL作成
+$stmt = $pdo->prepare("SELECT * FROM unit_table");
+$status = $stmt->execute();
+
+//３．データ表示
+$view="";
+if ($status==false) {
+    //execute（SQL実行時にエラーがある場合）
+    $error = $stmt->errorInfo();
+    exit("ErrorQuery:".$error[2]);
+
+}else{
+  //Selectデータの数だけ自動でループしてくれる
+  //FETCH_ASSOC=http://php.net/manual/ja/pdostatement.fetch.php
+    while( $result = $stmt->fetch(PDO::FETCH_ASSOC)){
+    $view .= "<p>";
+    $view .= $result["indate"] .":". $result["name"] .":". $result["email"].":". $result["naiyou"];
+    $view .= "</p>";
+    }
+
+}
 $message = date('Y/m/d/l');
-
-
-
-
 
 ?>
 
