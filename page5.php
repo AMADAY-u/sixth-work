@@ -2,13 +2,13 @@
 //1.  DB接続します
 try {
 //ID:'root', Password: 'root'
-    $pdo = new PDO('mysql:dbname=unit_db;charset=utf8;host=localhost','root','root');
+    $pdo = new PDO('mysql:dbname=vet_db;charset=utf8;host=localhost','root','root');
 } catch (PDOException $e) {
     exit('DBConnectError:'.$e->getMessage());
 }
 
 //２．データ取得SQL作成
-$stmt = $pdo->prepare("SELECT * FROM unit_table");
+$stmt = $pdo->prepare("SELECT * FROM pets_db");
 $status = $stmt->execute();
 
 //３．データ表示
@@ -22,8 +22,9 @@ if ($status==false) {
   //Selectデータの数だけ自動でループしてくれる
   //FETCH_ASSOC=http://php.net/manual/ja/pdostatement.fetch.php
     while( $result = $stmt->fetch(PDO::FETCH_ASSOC)){
-    $view .= "<p>";
-    $view .= $result["indate"] .":". $result["name"] .":". $result["email"].":". $result["naiyou"];
+    $view .= "<p style = 'text-align:center; font-size: 20px;>";
+    $view .= $result["indate"] ." /". $result["content"] ."/". $result["hung"]."/". $result["act"]."/". $result["freq"].
+    "<br>". $result["pcomment"];
     $view .= "</p>";
     }
 
@@ -53,25 +54,9 @@ $message = date('Y/m/d/l');
             </div>
         </div>
         <!-- /.prof -->
-<h1 style='text-align:center; font-size: 20px; font-weight:bold'>毎日の健康記録</h1>
-<?php
-
-// 
-// ファイルを変数に格納
-$filename = './data/data.txt';
-
-// fopenでファイルを開く（'r'は読み込みモードで開く）
-$fp = fopen($filename, 'r');
-
-// fgetsでファイルを読み込み、変数に格納
-$txt = fgets($fp);
-
-// ファイルを読み込んだ変数を出力
-echo $txt.'<br>';
-
-// fcloseでファイルを閉じる
-fclose($fp);
-?>
+<h1 style='text-align:center; font-size: 20px; font-weight:bold'>毎日の健康記録<br>
+(記録日時/食餌内容/食欲/活動量/頻度/コメント)</h1>
+<?=$view;?>
     <div class='contents'>
         <div class='title'>メニュー</div>
         <ul>

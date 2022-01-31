@@ -9,9 +9,11 @@
  */
 
 //1. POSTデータ取得
-$name = $_POST['name'];
-$email = $_POST['email'];
-$content = $_POST['content'];
+$content = $_GET['content'];
+$hung = $_GET['hung'];
+$act = $_GET['act'];
+$freq = $_GET['freq'];
+$pcomment = $_GET['pcomment'];
 
 // echo $name;
 // echo $email;
@@ -21,7 +23,7 @@ $content = $_POST['content'];
 //2. DB接続します
 try {
   //ID:'root', Password: 'root'
-  $pdo = new PDO('mysql:dbname=unit_db;charset=utf8;host=localhost','root','root');
+  $pdo = new PDO('mysql:dbname=vet_db;charset=utf8;host=localhost','root','root');
 } catch (PDOException $e) {
   exit('DBConnectError:'.$e->getMessage());
 }
@@ -33,12 +35,14 @@ try {
 
 
 // 1. SQL文を用意
-$stmt = $pdo->prepare("INSERT INTO unit_table(id, name, email, naiyou, indate)VALUES(NULL, :name, :email, :text, sysdate())");
+$stmt = $pdo->prepare("INSERT INTO pets_db(id, content, hung, act, freq, pcomment, indate)VALUES(NULL, :content, :hung, :act, :freq, :pcomment, sysdate())");
 
 //  2. バインド変数を用意
-$stmt->bindValue(':name', $name, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
-$stmt->bindValue(':email', $email, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
-$stmt->bindValue(':text', $content, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
+$stmt->bindValue(':content', $content, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
+$stmt->bindValue(':hung', $hung, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
+$stmt->bindValue(':act', $act, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
+$stmt->bindValue(':freq', $freq, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
+$stmt->bindValue(':pcomment', $pcomment, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
 //bindValue:より安全に管理するためのもの。
 
 //  3. 実行
@@ -51,7 +55,7 @@ if($status==false){
   exit("ErrorMessage:".$error[2]);
 }else{
   //５．index.phpへリダイレクト
-  header("Location: select.php");
+  header("Location: page5.php");
   exit;
 
 

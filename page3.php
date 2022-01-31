@@ -50,7 +50,7 @@ $text = $_POST['text'];
             </div>
         </div>
         <!-- /.contents -->
-        <form action="page4.php" method="get">
+        <form action="insert2.php" method="get">
 
             <div style="font-size: 20px;">
                 <div style="font-weight: bold; margin: 0 0 32px;">
