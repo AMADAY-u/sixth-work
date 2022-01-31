@@ -14,7 +14,7 @@ $address = $_POST['address'];
 $email = $_POST['email'];
 $pname = $_POST['pname'];
 $sp = $_POST['sp'];
-$comment = $_POST['comment'];
+$comment = $_POST['text'];
 
 // echo $name;
 // echo $email;

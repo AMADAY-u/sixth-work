@@ -56,7 +56,7 @@ $message = date('Y/m/d/l');
         </div>
         <!-- /.contents -->
 
-        <form action='page2.php' method="post">
+        <form action='insert1.php' method="post">
             <p>飼っているペットはなにかな？</p>
                 <input type='radio' name="dog" value="dog">いっぬ！
                 <input type='radio' name="cat" value="cat">ねっこ！
