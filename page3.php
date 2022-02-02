@@ -98,6 +98,7 @@ $text = $_POST['text'];
         <div class='contents'>
             <div class='title'>メニュー</div>
             <ul>
+                <li><a href="page2.php">プロフィールへ</a></li>
                 <li><a href="page5.php">今までの記録を確認</a></li>
             </ul>
         </div>

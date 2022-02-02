@@ -9,11 +9,16 @@
  */
 
 //1. POSTデータ取得
+$pet = $_POST['pet'];
 $name = $_POST['name'];
 $address = $_POST['address'];
 $email = $_POST['email'];
 $pname = $_POST['pname'];
+$sex = $_POST['sex'];
+$birth = $_POST['birth'];
 $sp = $_POST['sp'];
+$mhistory = $_POST['mhistory'];
+$hospital = $_POST['hospital'];
 $comment = $_POST['text'];
 
 // echo $name;
@@ -36,14 +41,20 @@ try {
 
 
 // 1. SQL文を用意
-$stmt = $pdo->prepare("INSERT INTO honer_db(id, name, address, email, pname, sp, comment)VALUES(NULL, :name, :address, :email, :pname, :sp, :comment)");
+$stmt = $pdo->prepare("INSERT INTO honer_db(id, pet, name, address, email, pname, sex, birth, sp, mhistory, hospital, comment)
+VALUES(NULL, :pet, :name, :address, :email, :pname, :sex, :birth, :sp, :mhistory, :hospital, :comment)");
 
 //  2. バインド変数を用意
+$stmt->bindValue(':pet', $pet, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
 $stmt->bindValue(':name', $name, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
 $stmt->bindValue(':address', $address, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
 $stmt->bindValue(':email', $email, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
 $stmt->bindValue(':pname', $pname, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
+$stmt->bindValue(':sex', $sex, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
+$stmt->bindValue(':birth', $birth, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
 $stmt->bindValue(':sp', $sp, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
+$stmt->bindValue(':mhistory', $mhistory, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
+$stmt->bindValue(':hospital', $hospital, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
 $stmt->bindValue(':comment', $comment, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
 //bindValue:より安全に管理するためのもの。
 

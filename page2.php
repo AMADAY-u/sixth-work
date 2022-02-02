@@ -17,21 +17,6 @@ if(isset($_POST['dog'])){
     $last = 'だよ！';
 };
 
-
-
-$name = $_POST["name"];
-$address = $_POST["address"];
-$email = $_POST["email"];
-$pname = $_POST["pname"];
-$sp = $_POST["sp"];
-
-
-$file = fopen("./data/data.txt","a");
-
-fwrite($file,"<h2 style = 'text-align:center; font-size: 30px; font-weight:bold'>".h($pname).'</h2>'.'<br>');
-
-fclose($file);
-
 ?>
 
 <?php
@@ -44,15 +29,20 @@ try {
 }
 
 //２．データ取得SQL作成
-$stmt = $pdo->prepare("SELECT * FROM honer_db WHERE id=2");
+$stmt = $pdo->prepare("SELECT * FROM honer_db ORDER BY id DESC LIMIT 1");
 $status = $stmt->execute();
 
 //３．データ表示
+$pet = "";
 $name = "";
 $address = "";
 $email = "";
 $pname = "";
+$sex = "";
+$birth = "";
 $sp = "";
+$mhistory = "";
+$hospital = "";
 $text = "";
 if ($status==false) {
     //execute（SQL実行時にエラーがある場合）
@@ -63,11 +53,16 @@ if ($status==false) {
   //Selectデータの数だけ自動でループしてくれる
   //FETCH_ASSOC=http://php.net/manual/ja/pdostatement.fetch.php
   while( $result = $stmt->fetch(PDO::FETCH_ASSOC)){
+    $pet .= $result["pet"] ;
     $name .= $result["name"] ;
     $address .= $result["address"] ;
     $email .= $result["email"] ;
     $pname .= $result["pname"] ;
+    $sex .= $result["sex"] ;
+    $birth .= $result["birth"] ;
     $sp .= $result["sp"] ;
+    $mhistory .= $result["mhistory"] ;
+    $hospital .= $result["hospital"] ;
     $text .= $result["comment"] ;
     
     $view .= "</p>";
@@ -113,14 +108,19 @@ if ($status==false) {
         <!-- /.prof -->
 
         <div class='contents'>
-            <div class='title'>個人情報<?=$last?></div>
+            <div class='title'>個人情報</div>
+            <div class='text'>種：<?=$pet;?></div>
             <div class='text'>主人名前：<?=$name;?></div>
             <div class='text'>住所：<?php echo $address;?></div>
 
             <div class='text'>アドレス：<?php echo $email;?></div>
             <div class='text'>ペットの名前：<?php echo $pname;?></div>
+            <div class='text'>性別：<?php echo $sex;?></div>
+            <div class='text'>誕生日：<?php echo $birth;?></div>
 
             <div class='text'>種名：<?php echo $sp;?></div>
+            <div class='text'>既往歴：<?php echo $mhistory;?></div>
+            <div class='text'>かかりつけの病院：<?php echo $hospital;?></div>
             <div class='text'>特徴：<?php echo $text;?></div>
         </div>
         <!-- /.contents -->
@@ -128,6 +128,7 @@ if ($status==false) {
         <div class='contents'>
             <div class='title'>毎日の食餌・体調を記録する</div>
             <ul>
+                <li><a href="page1.php">個人情報修正</a></li>
                 <li><a href="page3.php">記録フォームへ</a></li>
             </ul>
             <div class='text'></div>
