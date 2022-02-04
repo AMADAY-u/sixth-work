@@ -22,9 +22,8 @@ if ($status==false) {
   //Selectデータの数だけ自動でループしてくれる
   //FETCH_ASSOC=http://php.net/manual/ja/pdostatement.fetch.php
     while( $result = $stmt->fetch(PDO::FETCH_ASSOC)){
-    $view .= "<p style = 'text-align:center; font-size: 20px;>";
-    $view .= $result["indate"] ." /". $result["content"] ."/". $result["hung"]."/". $result["act"]."/". $result["freq"].
-    "<br>". $result["pcomment"];
+    $view .= "<p class='contents'>";
+    $view .= $result["indate"] ." /". $result["content"] ."/". $result["hung"]."/". $result["act"]."/". $result["freq"]."<br>". $result["pcomment"];
     $view .= "</p>";
     }
 
@@ -54,13 +53,14 @@ $message = date('Y/m/d/l');
             </div>
         </div>
         <!-- /.prof -->
-<h1 style='text-align:center; font-size: 20px; font-weight:bold'>毎日の健康記録<br>
-(記録日時/食餌内容/食欲/活動量/頻度/コメント)</h1>
+<h1 class='contents' style='font-size: 25px; font-weight: bold;'>毎日の健康記録<br>
+(記録日時/食餌内容/食欲/活動量/食餌頻度/コメント)</h1>
 <?=$view;?>
-    <div class='contents'>
-        <div class='title'>メニュー</div>
+    <div>
+    <div class='title'>メニュー</div>
         <ul>
-            <li><a href="page3.php">記録する</a></li>
+            <li class='contents'><a href="page3.php">記録する</a></li>
+            <li class='contents'><a href="page2.php">プロフィールへ</a></li>
         </ul>
     </div>
 

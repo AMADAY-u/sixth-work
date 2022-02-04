@@ -20,6 +20,8 @@ $sp = $_POST['sp'];
 $mhistory = $_POST['mhistory'];
 $hospital = $_POST['hospital'];
 $comment = $_POST['text'];
+$image = $_FILES['image']['tmp_name'];
+
 
 // echo $name;
 // echo $email;
@@ -41,8 +43,8 @@ try {
 
 
 // 1. SQL文を用意
-$stmt = $pdo->prepare("INSERT INTO honer_db(id, pet, name, address, email, pname, sex, birth, sp, mhistory, hospital, comment)
-VALUES(NULL, :pet, :name, :address, :email, :pname, :sex, :birth, :sp, :mhistory, :hospital, :comment)");
+$stmt = $pdo->prepare("INSERT INTO honer_db(id, pet, name, address, email, pname, sex, birth, sp, mhistory, hospital, comment, image)
+VALUES(NULL, :pet, :name, :address, :email, :pname, :sex, :birth, :sp, :mhistory, :hospital, :comment, :image)");
 
 //  2. バインド変数を用意
 $stmt->bindValue(':pet', $pet, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
@@ -56,6 +58,7 @@ $stmt->bindValue(':sp', $sp, PDO::PARAM_STR);  //Integer（数値の場合 PDO::
 $stmt->bindValue(':mhistory', $mhistory, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
 $stmt->bindValue(':hospital', $hospital, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
 $stmt->bindValue(':comment', $comment, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
+$stmt->bindValue(':image', $image, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
 //bindValue:より安全に管理するためのもの。
 
 //  3. 実行

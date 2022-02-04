@@ -56,7 +56,7 @@ $message = date('Y/m/d/l');
         </div>
         <!-- /.contents -->
 
-        <form action='insert1.php' method="post">
+        <form action='insert1.php' method="post" enctype="multipart/form-data">
             <p>飼っているペットはなにかな？</p>
                 <input type='radio' name="pet" value="犬">いっぬ！
                 <input type='radio' name="pet" value="猫">ねっこ！
@@ -79,6 +79,8 @@ $message = date('Y/m/d/l');
                 </ul>
             <p>ペットの好きなものや特徴を好きに書いてね！！！</p>
             <textarea name='text' id='comment'></textarea>
+            <label>画像を選択</label>
+            <input type="file" name="image" >
 
             <button type="submit">個人情報を送信！</button>
         </form>
